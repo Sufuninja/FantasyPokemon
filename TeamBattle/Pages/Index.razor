@@ -1,4 +1,5 @@
 ﻿@page "/"
+@attribute [Authorize]
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Components.Authorization
 @using Microsoft.VisualBasic
@@ -29,6 +30,13 @@
         @foreach (var team in _battleTeams)
         {
             <li>@team.Name: @team.Id</li>
+            if (team.Members.Any())
+            {
+                foreach (var member in team.Members)
+                {
+                    <li>id: @member.Id, pokiApiId: @member.PokiApiId</li>   
+                }
+            }
         }
     </ul>
 }

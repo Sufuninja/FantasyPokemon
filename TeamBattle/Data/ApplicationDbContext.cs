@@ -22,6 +22,13 @@ namespace TeamBattle.Data
                 a.WithOwner().HasForeignKey("OwnerId");
                 a.Property<int>("Id");
                 a.HasKey("Id");
+                a.OwnsMany(c => c.Members, d =>
+                {
+                    d.WithOwner().HasForeignKey("BattleTeamId");
+                    d.Property<int>("Id");
+                    d.HasKey("Id");
+                    d.Property<string>("PokiApiId");
+                });
             });
 
             base.OnModelCreating(builder);
@@ -33,5 +40,14 @@ namespace TeamBattle.Data
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public ICollection<Member> Members { get; set; }
+    }
+
+    [Owned]
+    public class Member 
+    {
+        public int Id { get; set; }
+        public int BattleTeamId { get; set; }
+        public string PokiApiId { get; set; }
     }
 }
