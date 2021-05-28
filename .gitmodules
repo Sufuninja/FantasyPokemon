@@ -1,0 +1,3 @@
+[submodule "TeamBattle.API"]
+	path = TeamBattle.API
+	url = https://github.com/Sufuninja/TeamBattle.API.git
